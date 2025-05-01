@@ -1,0 +1,12 @@
+CREATE DATABASE railpointDB;
+
+USE railpointDB;
+
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    trainId INT NOT NULL,
+    seats INT NOT NULL,
+    bookingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

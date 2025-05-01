@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="form-confirm-styles.css">
+</head>
+<body>
+
+<div class="confirmation-container">
+    <h1>Booking Confirmation</h1>
+    <div id="booking-details">
+        <!-- The details will be dynamically added here -->
+    </div>
+</div>
+
+<script>
+    // Function to get URL parameters
+    function getUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return {
+            totalFare: urlParams.get('totalFare'),
+            seats: urlParams.get('seats'),
+            trainClass: urlParams.get('trainClass')
+        };
+    }
+
+    // Display the booking details
+    const bookingDetails = getUrlParams();
+    document.getElementById('booking-details').innerHTML = `
+        <p><strong>Total Fare:</strong> ₹${bookingDetails.totalFare}</p>
+        <p><strong>Seats:</strong> ${bookingDetails.seats}</p>
+        <p><strong>Class:</strong> ${bookingDetails.trainClass}</p>
+        <button onclick="confirmBooking()">Confirm Booking And Pay Now</button>
+    `;
+
+    function confirmBooking() {
+        alert('Booking confirmed!');
+        window.location.href = 'payment-page.html'; // Redirect to home page after booking confirmation
+    }
+</script>
+
+</body>
+</html>

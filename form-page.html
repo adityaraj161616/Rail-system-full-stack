@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Booking Form</title>
+    <link rel="stylesheet" href="form-styles.css">
+</head>
+<body>
+
+<div class="form-container">
+    <h1>Train Booking Form</h1>
+    <form id="train-booking-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email">
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+
+        <label for="from-station">From (Departure Station)</label>
+        <input type="text" id="from-station" name="from_station" required placeholder="Enter departure station">
+
+        <label for="to-station">To (Arrival Station)</label>
+        <input type="text" id="to-station" name="to_station" required placeholder="Enter arrival station">
+
+        <label for="departure-date">Departure Date</label>
+        <input type="date" id="departure-date" name="departure_date" required>
+
+        <label for="train-class">Class</label>
+        <select id="train-class" name="train_class" required>
+            <option value="economy">1st Ac</option>
+            <option value="business">2nd Ac</option>
+            <option value="first-class">3rd Ac</option>
+            <option value="sleeper">Sleeper</option>
+            <option value="general">General</option>
+        </select>
+
+        <label for="seats">Number of Seats</label>
+        <input type="number" id="seats" name="seats" required min="1" max="10" placeholder="Number of seats">
+
+        <label for="special-request">Special Requests</label>
+        <textarea id="special-request" name="special_request" rows="4" placeholder="Enter any special requests (optional)"></textarea>
+
+        <div class="button-container">
+            <button type="submit" class="submit-btn">Book Now</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Train fare data (for example purposes, actual fares may vary)
+    const trainFares = {
+        economy: 1500,
+        business: 2500,
+        'first-class': 3500,
+        sleeper: 500,
+        general: 200
+    };
+
+    document.getElementById('train-booking-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const fromStation = document.getElementById('from-station').value;
+        const toStation = document.getElementById('to-station').value;
+        const departureDate = document.getElementById('departure-date').value;
+        const trainClass = document.getElementById('train-class').value;
+        const seats = parseInt(document.getElementById('seats').value);
+        const specialRequest = document.getElementById('special-request').value;
+
+        if (!seats || seats <= 0) {
+            alert('Please select a valid number of seats.');
+            return;
+        }
+
+        // Calculate total fare
+        const farePerSeat = trainFares[trainClass];
+        if (!farePerSeat) {
+            alert('Invalid train class selected.');
+            return;
+        }
+
+        const totalFare = farePerSeat * seats;
+
+        // Redirect to fare confirmation page with the calculated fare
+        const farePageUrl = `fare-confirmation.html?totalFare=${totalFare}&seats=${seats}&trainClass=${trainClass}`;
+        window.location.href = farePageUrl;
+
+        
+    });
+</script>
+
+</body>
+</html>
